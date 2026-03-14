@@ -19,7 +19,7 @@ string ans="";
                 curr.pop_back();
             }
 
-            // if(ans!="") return; 
+            if(ans!="") return; 
         }
     }
     string getHappyString(int n, int k) {
