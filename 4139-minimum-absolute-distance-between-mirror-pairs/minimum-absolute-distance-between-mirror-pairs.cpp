@@ -37,21 +37,25 @@
 // };
 class Solution {
 public:
-    int minMirrorPairDistance(vector<int>& nums) {
-        int res = 100000, i = 0;
-        unordered_map<int, int> seen;
-
-        for (int& n : nums) {
-            int r;
-            if (seen.count(n))
-                res = min(res, i - seen[n]);
-
-            for (r = 0; n; n /= 10)
-                r = r * 10 + (n % 10);
-
-            seen[r] = i++;
+    int reverse(int x) {
+        int rev = 0;
+        while (x > 0) {
+            rev = rev * 10 + x % 10;
+            x /= 10;
         }
+        return rev;
+    }
 
-        return -(res == 100000) | res;
+    int minMirrorPairDistance(vector<int>& a) {
+        unordered_map<int, int> mpp;
+        int n = a.size(), ans = 1e6;
+
+        for (int i = 0; i < n; i++) {
+            if (mpp.count(a[i])) {
+                ans = min(ans, i - mpp[a[i]]);
+            }
+            mpp[reverse(a[i])] = i;
+        }
+        return ans == 1e6 ? -1 : ans;
     }
 };
