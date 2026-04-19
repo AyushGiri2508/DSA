@@ -25,8 +25,8 @@ void solve(Node* root,vector<int>&ans){
         return ;
     }
     ans.push_back(root->val);
-    for(auto val:root->children){
-        solve(val,ans);
+    for(auto child:root->children){
+        solve(child,ans);
     }
 }
     vector<int> preorder(Node* root) {
