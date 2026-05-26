@@ -1,21 +1,25 @@
 class Solution {
 public:
     int numberOfSpecialChars(string word) {
-       vector<bool> hasLower(26, false);
-        vector<bool> hasUpper(26, false);       
-        for (char c : word) {
-            if (c >= 'a' && c <= 'z') {
-                hasLower[c - 'a'] = true;
-            } else if (c >= 'A' && c <= 'Z') {
-                hasUpper[c - 'A'] = true;
+        unordered_set<char> lower, upper;
+
+        for(char ch : word) {
+            if(islower(ch)) {
+                lower.insert(ch);
             }
-        }      
-        int count = 0;
-        for (int i = 0; i < 26; i++) {
-            if (hasLower[i] && hasUpper[i]) {
-                count++;
+            else {
+                upper.insert(tolower(ch));
             }
-        }   
-        return count;
+        }
+
+        int cnt = 0;
+
+        for(char ch : lower) {
+            if(upper.count(ch)) {
+                cnt++;
+            }
+        }
+
+        return cnt;
     }
 };
