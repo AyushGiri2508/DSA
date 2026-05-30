@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-TreeNode* solve(vector<int>nums,int s,int e){
+TreeNode* solve(vector<int>&nums,int s,int e){
     if(s>e){
         return NULL;
     }
