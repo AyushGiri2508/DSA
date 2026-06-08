@@ -29,27 +29,60 @@
 //             return ans;
 //         }
 //     };
+// class Solution {
+// public:
+//     vector<int> pivotArray(vector<int>& nums, int pivot) {
+//         vector<int> ans;
+//         // ans.reserve(nums.size());
+
+//         int cnt = 0;
+
+//         for (int x : nums) {
+//             if (x < pivot)
+//                 ans.push_back(x);
+//             else if (x == pivot)
+//                 cnt++;
+//         }
+
+//         while (cnt--)
+//             ans.push_back(pivot);
+
+//         for (int x : nums) {
+//             if (x > pivot)
+//                 ans.push_back(x);
+//         }
+
+//         return ans;
+//     }
+
+// };
+
+
 class Solution {
 public:
     vector<int> pivotArray(vector<int>& nums, int pivot) {
-        vector<int> ans;
-        // ans.reserve(nums.size());
+        int n = nums.size();
+        vector<int> ans(n);
 
-        int cnt = 0;
+        int left = 0;
+        int right = n - 1;
 
-        for (int x : nums) {
-            if (x < pivot)
-                ans.push_back(x);
-            else if (x == pivot)
-                cnt++;
+        // Fill smaller elements from left
+        // Fill greater elements from right
+        for (int i = 0; i < n; i++) {
+            if (nums[i] < pivot) {
+                ans[left++] = nums[i];
+            }
         }
 
-        while (cnt--)
-            ans.push_back(pivot);
+        for (int i = n - 1; i >= 0; i--) {
+            if (nums[i] > pivot) {
+                ans[right--] = nums[i];
+            }
+        }
 
-        for (int x : nums) {
-            if (x > pivot)
-                ans.push_back(x);
+        while (left <= right) {
+            ans[left++] = pivot;
         }
 
         return ans;
